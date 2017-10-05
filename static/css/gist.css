@@ -1,0 +1,51 @@
+.triangle {
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: red;
+}
+
+/*隐藏过长文本*/
+p {
+    width: 100px;
+    white-space: nowrap; /*不换行*/
+    text-overflow: ellipsis; /*省略号*/
+    overflow: hidden;
+}
+
+.wrap {
+    width: 500px;
+}
+
+.content {
+    margin-left: 100px;
+    background-color: red;
+}
+
+.clearFix:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    clear: both;
+}
+
+.main {
+    float: left;
+    width: 100%;
+}
+
+.aside {
+    float: left;
+    width: 100px;
+    margin-left: -500px;
+    background-color: blue;
+    position: relative;
+}
+
+/*自定义样式*/
+greeting {
+    display: block;
+    font-size: 36px;
+    color: red;
+}
