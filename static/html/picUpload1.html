@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax upload pic</title>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../js/uploadPreview.js"></script>
+</head>
+<body>
+username: <input id="username" type="text"><br>
+<!--预览效果-->
+user pic：<input id="userFace" type="file" onchange="preview(this)"><br>
+<div><img id="ImgPr"/></div>
+<input type="button" id="btnClick" value="upload">
+<script>
+    $("#btnClick").click(function () {
+        var formData = new FormData();
+        formData.append("username", $("#username").val());
+        formData.append("file", $("#userFace")[0].files[0]);
+        $.ajax({
+            url: '/fileupload',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (msg) {
+                alert(msg);
+            }
+        });
+    });
+    $("#userFace").uploadPreview({Img: "ImgPr"});
+
+</script>
+</body>
+</html>

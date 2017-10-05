@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax upload pic</title>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+username: <input id="username" type="text"><br>
+<!--预览效果-->
+user pic：<input id="userFace" type="file" onchange="preview(this)"><br>
+<div id="preview"></div>
+<input type="button" id="btnClick" value="upload">
+<script>
+    $("#btnClick").click(function () {
+        var formData = new FormData();
+        formData.append("username", $("#username").val());
+        formData.append("file", $("#userFace")[0].files[0]);
+        $.ajax({
+            url: '/fileupload',
+            type: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (msg) {
+                alert(msg);
+            }
+        });
+    });
+
+    /**
+     * 预览图片
+     * @param file
+     */
+    function preview(file) {
+        var prevDiv = document.getElementById('preview');
+        if (file.files && file.files[0]) {
+            //FileReader in h5
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                prevDiv.innerHTML = '<img src="' + evt.target.result + '" />';
+            };
+            reader.readAsDataURL(file.files[0]);
+        } else {
+            prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+        }
+    }
+
+    $(document).ready(function() {
+        //检测是否有输入空格，常用于电子邮件，用户名，密码输入框
+        $('#username').keydown(function(e) {
+            if (e.keyCode === 32) {
+                alert("space detected！");
+                return false;
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

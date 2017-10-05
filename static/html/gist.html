@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script>
+        /**
+         * check a given date is valid or not
+         * @param value date in string format 'xx/xx/xxxx'
+         * @param userFormat
+         */
+        function isValidDate(value, userFormat) {
+            // Set default format if format is not provided
+            userFormat = userFormat || 'mm/dd/yyyy';
+
+            // Find custom delimiter by excluding
+            // month, day and year characters
+            var delimiter = /[^mdy]/.exec(userFormat)[0];
+
+            // Create an array with month, day and year
+            // so we know the format order by index
+            var theFormat = userFormat.split(delimiter);
+
+            // Create array from user date
+            var theDate = value.split(delimiter);
+
+            function isDate(date, format) {
+                var m, d, y, i = 0, len = format.length, f;
+                for (i; i < len; i++) {
+                    f = format[i];
+                    if (/m/.test(f)) m = date[i];
+                    if (/d/.test(f)) d = date[i];
+                    if (/y/.test(f)) y = date[i];
+                }
+                return (
+                    m > 0 && m < 13 &&
+                    y && y.length === 4 &&
+                    d > 0 &&
+                    // Check if it's a valid day of the month
+                    d <= (new Date(y, m, 0)).getDate()
+                );
+            }
+            return isDate(theDate, theFormat);
+        }
+
+    </script>
+</head>
+<body>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#btnClick").click(function () {
+            //TODO
+        isValidDate('dd-mm-yyyy', '31/11/2012');
+        });
+
+        //检测 copy 动作
+        $("#username").bind('copy', function() {
+            alert("copy behaviour detected!");
+            $('span').text('copy behaviour detected!')
+        });
+        //检测 paste 动作
+        $("#username").bind('paste', function() {
+            alert("paste behaviour detected!");
+            $('span').text('paste behaviour detected!')
+        });
+        //检测 paste 动作
+        $("#username").bind('cut', function() {
+            alert("cut behaviour detected!");
+            $('span').text('cut behaviour detected!')
+        });
+
+    });
+</script>
+
+date: <input id="username" type="text" value="Please input a date"><br>
+<input type="button" id="btnClick" value="check the validity of date">
+</body>
+</html>
+
+

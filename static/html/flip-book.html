@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css3-flip-book</title>
+    //https://github.com/BUPT-HJM/css3-flip-book/blob/master/index.html
+    <link rel="stylesheet" type="text/css" href="../css/flip.css">
+</head>
+<body>
+<div class="book preserve-3d">
+    <!--//TODO: 能不能实现轮回播放的效果？-->
+    <!-- page 4 -->
+    <div class="book-page-box book-page-4 preserve-3d">
+        <div class="book-page page-front">
+            <p>第三页</p>
+        </div>
+    </div>
+    <!-- page 3 -->
+    <div class="book-page-box book-page-3 preserve-3d flip-animation-3">
+        <div class="book-page page-front">
+            <p>第二页</p>
+        </div>
+    </div>
+    <!-- page 2 -->
+    <div class="book-page-box book-page-2 preserve-3d flip-animation-2">
+        <div class="book-page page-front">
+            <p>第一页</p>
+        </div>
+    </div>
+    <!-- 书的封面 -->
+    <div class="book-page-box book-page-1 preserve-3d flip-animation-1">
+        <div class="book-page page-front">
+            <p>
+                css3
+                <br>
+                flip-book
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
